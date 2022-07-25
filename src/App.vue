@@ -1,12 +1,32 @@
-<script setup>
-import Login from "./components/Login.vue";
-</script>
-
 <template>
-  <Login />
+  <login @login.once="callback" v-if="!login.isLog"/>
+  <home v-if="login.isLog" />
 </template>
 
-<style scoped>
+<script>
+import Login from "./components/Login.vue";
+import Home from "./components/Home.vue";
 
+export default {
+  components: {
+    Login,
+    Home,
+},
+  data() {
+    return {
+      login: {
+        isLog: false,
+      },
+    }
+  },
+  methods: {
+    callback() {
+      this.login.isLog = !this.login.isLog;
+      console.log(this.login);
+    }
+  },
+}
 
-</style>
+</script>
+
+<style scoped></style>
